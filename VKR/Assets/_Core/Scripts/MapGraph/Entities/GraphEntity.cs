@@ -10,7 +10,7 @@ namespace Game.MapGraph.Entities
     {
         protected override void RegisterTypes()
         {
-            RegisterType<InitializeGraphRequest>();
+            RegisterType<InitializeGraphFromUnityRequest>();
         }
         
 #if UNITY_EDITOR

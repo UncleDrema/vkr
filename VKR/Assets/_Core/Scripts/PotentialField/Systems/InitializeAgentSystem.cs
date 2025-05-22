@@ -1,13 +1,10 @@
-﻿using Game.PotentialField.Components;
+﻿using Game.Planning.Components;
+using Game.PotentialField.Components;
 using Game.PotentialField.Requests;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Scellecs.Morpeh.Transform.Components;
-using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEngine;
 
 namespace Game.PotentialField.Systems
 {
@@ -37,11 +34,13 @@ namespace Game.PotentialField.Systems
         {
             foreach (var agent in _agents)
             {
+                ref var cPatrol = ref agent.AddComponent<AgentPatrolComponent>();
                 ref var cLocalField = ref agent.GetComponent<AgentLocalFieldComponent>();
                 ref var cTransform = ref agent.GetComponent<TransformComponent>();
                 ref var cPotentialField = ref agent.GetComponent<PotentialFieldComponent>();
                 ref var cInitRequest = ref agent.GetComponent<InitializeAgentSelfRequest>();
 
+                cPatrol.GoalVertex = default;
                 cLocalField.Radius = 10;
                 cLocalField.Size = cLocalField.Radius * 2 + 1;
                 cLocalField.Epsilon = 0.05;

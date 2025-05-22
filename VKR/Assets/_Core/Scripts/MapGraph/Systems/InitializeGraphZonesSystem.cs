@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Game.MapGraph.Components;
+using Game.MapGraph.Events;
 using Game.MapGraph.Requests;
 using Scellecs.Morpeh;
+using Scellecs.Morpeh.Addons.Feature.Events;
 using Scellecs.Morpeh.Addons.Systems;
 using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
@@ -132,6 +134,7 @@ namespace Game.MapGraph.Systems
             
             var boundary = new NativeList<Entity>(Allocator.Temp);
             bool growing = true;
+            int iteration = 0;
             while (growing)
             {
                 growing = false;
@@ -164,12 +167,21 @@ namespace Game.MapGraph.Systems
                         growing = true;
                     }
                 }
+                
+                iteration++;
+                if (iteration > 1000)
+                {
+                    Debug.LogError("Infinite loop in InitializeGraphZonesSystem");
+                    break;
+                }
             }
 
             boundary.Dispose();
             seeds.Dispose();
             seedPositions.Dispose();
             vertexPositions.Dispose();
+
+            World.CreateEventEntity<ZonesInitializedEvent>();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Game.MapGraph;
+using Game.Planning;
+using Game.PotentialField;
 using Game.SceneManagement;
 using Scellecs.Morpeh;
 using UnityEngine;
@@ -15,6 +17,8 @@ namespace Game.GameStartup
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterMapGraph();
+            builder.RegisterPatrol();
+            builder.RegisterPotentialField();
             builder.RegisterSceneManagement(_sceneRepository);
         }
     }

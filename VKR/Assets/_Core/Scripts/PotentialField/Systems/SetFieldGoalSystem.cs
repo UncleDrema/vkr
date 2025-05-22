@@ -102,7 +102,7 @@ namespace Game.PotentialField.Systems
                     }
                     else
                     {
-                        Debug.LogError($"SetFieldGoalSystem: Failed to set goal after {cSetGoalRequest.RetryCount} attempts");
+                        Debug.LogWarning($"SetFieldGoalSystem: Failed to set goal after {cSetGoalRequest.RetryCount} attempts");
                         agent.AddComponent<SetGoalFailEvent>();
                         cPotentialField.GoalX = -1;
                         cPotentialField.GoalY = -1;

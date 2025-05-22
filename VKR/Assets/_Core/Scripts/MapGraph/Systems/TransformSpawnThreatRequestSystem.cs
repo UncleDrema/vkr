@@ -52,12 +52,12 @@ namespace Game.MapGraph.Systems
                     var vertexAndNeighbours = new NativeList<Entity>(neighbors.Count + 1, Allocator.Temp);
                     var vertexAndNeighboursDistances = new NativeList<float>(neighbors.Count + 1, Allocator.Temp);
                     vertexAndNeighbours.Add(vertex);
-                    vertexAndNeighboursDistances.Add(distance);
+                    vertexAndNeighboursDistances.Add(distance + 1e-2f); // Добавляем небольшую константу, чтобы избежать деления на ноль
                     
                     foreach (var neighbor in neighbors)
                     {
                         ref var cNeighbor = ref neighbor.GetComponent<GraphVertexComponent>();
-                        distance = math.distance(cNeighbor.Position, spawnPosition);
+                        distance = math.distance(cNeighbor.Position, spawnPosition) + 1e-2f; // Добавляем небольшую константу, чтобы избежать деления на ноль
                         vertexAndNeighbours.Add(neighbor);
                         vertexAndNeighboursDistances.Add(distance);
                     }
@@ -87,7 +87,7 @@ namespace Game.MapGraph.Systems
                         ref var cSpawnThreatRequest = ref spawnThreatRequest.AddComponent<SpawnThreatRequest>();
                         cSpawnThreatRequest.TargetVertex = targetVertex;
                         cSpawnThreatRequest.ThreatLevel = proportionalThreatLevel;
-                        cSpawnThreatRequest.ThreadDuration = cSpawnRequest.ThreadDuration;
+                        cSpawnThreatRequest.ThreadDuration = cSpawnRequest.ThreatDuration;
                         cSpawnThreatRequest.DecayType = cSpawnRequest.DecayType;
                     }
                 }

@@ -35,7 +35,6 @@ namespace Game.MapGraph.Systems
             var zoneCount = new Dictionary<Entity, int>();
             int totalVertices = 0;
             int totalZones = 0;
-            StringBuilder sb = new StringBuilder();
             foreach (var zone in _zones)
             {
                 zoneList.Add(zone);
@@ -54,10 +53,7 @@ namespace Game.MapGraph.Systems
                 zoneCount[zone] = count;
                 totalVertices += count;
                 totalZones++;
-                sb.Append($"[{cZone.ZoneId}:{total}/{count}]");
             }
-            sb.AppendLine();
-            Debug.Log(sb.ToString());
             
             // 2) Собираем кандидатов (граничные вершины) и их выгоду Δ
             var candidates = new List<(Entity v, Entity fromZone, Entity toZone, float delta)>();

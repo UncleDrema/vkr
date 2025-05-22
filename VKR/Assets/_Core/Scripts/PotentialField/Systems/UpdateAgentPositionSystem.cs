@@ -3,7 +3,6 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Scellecs.Morpeh.Transform.Components;
 using Unity.IL2CPP.CompilerServices;
-using Unity.Mathematics;
 
 namespace Game.PotentialField.Systems
 {
@@ -12,18 +11,19 @@ namespace Game.PotentialField.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class UpdateAgentPositionSystem : UpdateSystem
     {
+        private readonly MapService _mapService;
+        
         private Filter _objects;
-        private Filter _maps;
+        
+        public UpdateAgentPositionSystem(MapService mapService)
+        {
+            _mapService = mapService;
+        }
         
         public override void OnAwake()
         {
             _objects = World.Filter
                 .With<MapPositionComponent>()
-                .With<TransformComponent>()
-                .Build();
-
-            _maps = World.Filter
-                .With<GlobalMapComponent>()
                 .With<TransformComponent>()
                 .Build();
         }
@@ -36,27 +36,9 @@ namespace Game.PotentialField.Systems
                 ref var cMapPosition = ref agent.GetComponent<MapPositionComponent>();
 
                 var pos = cTransform.Position();
-                
-                foreach (var map in _maps)
-                {
-                    ref var cMapTransform = ref map.GetComponent<TransformComponent>();
-                    ref var cMap = ref map.GetComponent<GlobalMapComponent>();
-                    
-                   
-                    var cellSize = cMap.CellSize;
-                    var width = cMap.Width;
-                    var height = cMap.Height;
-                    var center = cMapTransform.Position();
-                    
-                    var leftDownCorner = center - new float3(width * cellSize, 0, height * cellSize) / 2;
-                    var x = (int)((pos.x - leftDownCorner.x) / cellSize);
-                    var y = (int)((pos.z - leftDownCorner.z) / cellSize);
-                
-                    x = math.clamp(x, 0, width - 1);
-                    y = math.clamp(y, 0, height - 1);
-                    cMapPosition.X = x;
-                    cMapPosition.Y = y;
-                }
+                var mapPosition = _mapService.WorldToMapPosition(pos);
+                cMapPosition.X = mapPosition.x;
+                cMapPosition.Y = mapPosition.y;
             }
         }
     }

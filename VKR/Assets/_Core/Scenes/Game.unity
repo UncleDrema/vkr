@@ -627,6 +627,161 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6662833367433938877, guid: ad06b7199b1d2d74c808462f4b8c549b, type: 3}
   m_PrefabInstance: {fileID: 50568279}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &51860010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51860011}
+  - component: {fileID: 51860012}
+  m_Layer: 0
+  m_Name: Agent (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51860011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51860010}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: -4.999999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 680983096}
+  m_Father: {fileID: 1285212003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51860012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51860010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f9b2b5143f46078d9674311de058b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 6992870185391620096
+  - rid: 6992870185391620097
+  - rid: 6992870185391620098
+  - rid: 6992870185391620099
+  - rid: 6992870185391620100
+  - rid: 6992870185391620101
+  - rid: 6992870185391620102
+  - rid: 6992870185391620103
+  GlobalField: 1
+  DrawPotential: 1
+  DrawGradient: 1
+  PotentialScale: 0.4
+  references:
+    version: 2
+    RefIds:
+    - rid: 6992870185391620096
+      type: {class: TransformComponent, ns: Scellecs.Morpeh.Transform.Components, asm: Scellecs.Morpeh.Transform}
+      data:
+        IgnoreParentDestroyed: 0
+        LocalPosition:
+          x: -1
+          y: 0
+          z: -4.999999
+        LocalRotation:
+          value:
+            x: -0
+            y: -0
+            z: -0
+            w: 1
+        LocalScale:
+          x: 1
+          y: 1
+          z: 1
+        LocalToWorld:
+          c0:
+            x: 1
+            y: 0
+            z: 0
+            w: 0
+          c1:
+            x: 0
+            y: 1
+            z: 0
+            w: 0
+          c2:
+            x: 0
+            y: 0
+            z: 1
+            w: 0
+          c3:
+            x: -1
+            y: 0
+            z: -4.999999
+            w: 1
+    - rid: 6992870185391620097
+      type: {class: GameObjectComponent, ns: Game.Common.Components, asm: Assembly-CSharp}
+      data:
+        Object: {fileID: 51860010}
+        Transform: {fileID: 51860011}
+        KeepGameObjectOnComponentRemove: 0
+    - rid: 6992870185391620098
+      type: {class: MovementComponent, ns: Game.Movement.Components, asm: Assembly-CSharp}
+      data:
+        MaxRadiansDelta: 0
+        FreezeRotation:
+          x: 0
+          y: 0
+          z: 0
+        Speed: 1
+        Direction:
+          x: 0
+          y: 0
+          z: 0
+    - rid: 6992870185391620099
+      type: {class: AgentLocalFieldComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        Radius: 0
+        Size: 0
+        Epsilon: 0
+        Potentials: []
+        Fixed: 
+    - rid: 6992870185391620100
+      type: {class: PotentialFieldComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        Center:
+          x: 0
+          y: 0
+          z: 0
+        Width: 0
+        Height: 0
+        CellSize: 0
+        Potentials: []
+        Fixed: 
+        Epsilon: 0
+        GoalX: 0
+        GoalY: 0
+    - rid: 6992870185391620101
+      type: {class: InitializeAgentSelfRequest, ns: Game.PotentialField.Requests, asm: Assembly-CSharp}
+      data: 
+    - rid: 6992870185391620102
+      type: {class: MapPositionComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        X: 0
+        Y: 0
+    - rid: 6992870185391620103
+      type: {class: DynamicObstacleComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        SizeX: 1
+        SizeY: 1
 --- !u!1001 &57466146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,7 +1308,7 @@ MonoBehaviour:
           x: 0
           y: 0
           z: 0
-        Speed: 0
+        Speed: 1
         Direction:
           x: 0
           y: 0
@@ -2846,6 +3001,161 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6662833367433938877, guid: ad06b7199b1d2d74c808462f4b8c549b, type: 3}
   m_PrefabInstance: {fileID: 292466494}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &319982546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 319982547}
+  - component: {fileID: 319982548}
+  m_Layer: 0
+  m_Name: Agent (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &319982547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319982546}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 800868078}
+  m_Father: {fileID: 1285212003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319982548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319982546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f9b2b5143f46078d9674311de058b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 6992870185391620096
+  - rid: 6992870185391620097
+  - rid: 6992870185391620098
+  - rid: 6992870185391620099
+  - rid: 6992870185391620100
+  - rid: 6992870185391620101
+  - rid: 6992870185391620102
+  - rid: 6992870185391620103
+  GlobalField: 1
+  DrawPotential: 1
+  DrawGradient: 1
+  PotentialScale: 0.4
+  references:
+    version: 2
+    RefIds:
+    - rid: 6992870185391620096
+      type: {class: TransformComponent, ns: Scellecs.Morpeh.Transform.Components, asm: Scellecs.Morpeh.Transform}
+      data:
+        IgnoreParentDestroyed: 0
+        LocalPosition:
+          x: -11
+          y: 0
+          z: 1
+        LocalRotation:
+          value:
+            x: -0
+            y: -0
+            z: -0
+            w: 1
+        LocalScale:
+          x: 1
+          y: 1
+          z: 1
+        LocalToWorld:
+          c0:
+            x: 1
+            y: 0
+            z: 0
+            w: 0
+          c1:
+            x: 0
+            y: 1
+            z: 0
+            w: 0
+          c2:
+            x: 0
+            y: 0
+            z: 1
+            w: 0
+          c3:
+            x: -11
+            y: 0
+            z: 1
+            w: 1
+    - rid: 6992870185391620097
+      type: {class: GameObjectComponent, ns: Game.Common.Components, asm: Assembly-CSharp}
+      data:
+        Object: {fileID: 319982546}
+        Transform: {fileID: 319982547}
+        KeepGameObjectOnComponentRemove: 0
+    - rid: 6992870185391620098
+      type: {class: MovementComponent, ns: Game.Movement.Components, asm: Assembly-CSharp}
+      data:
+        MaxRadiansDelta: 0
+        FreezeRotation:
+          x: 0
+          y: 0
+          z: 0
+        Speed: 1
+        Direction:
+          x: 0
+          y: 0
+          z: 0
+    - rid: 6992870185391620099
+      type: {class: AgentLocalFieldComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        Radius: 0
+        Size: 0
+        Epsilon: 0
+        Potentials: []
+        Fixed: 
+    - rid: 6992870185391620100
+      type: {class: PotentialFieldComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        Center:
+          x: 0
+          y: 0
+          z: 0
+        Width: 0
+        Height: 0
+        CellSize: 0
+        Potentials: []
+        Fixed: 
+        Epsilon: 0
+        GoalX: 0
+        GoalY: 0
+    - rid: 6992870185391620101
+      type: {class: InitializeAgentSelfRequest, ns: Game.PotentialField.Requests, asm: Assembly-CSharp}
+      data: 
+    - rid: 6992870185391620102
+      type: {class: MapPositionComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        X: 0
+        Y: 0
+    - rid: 6992870185391620103
+      type: {class: DynamicObstacleComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        SizeX: 1
+        SizeY: 1
 --- !u!1001 &339132883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5853,6 +6163,111 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6662833367433938877, guid: ad06b7199b1d2d74c808462f4b8c549b, type: 3}
   m_PrefabInstance: {fileID: 660844351}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &680983095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680983096}
+  - component: {fileID: 680983099}
+  - component: {fileID: 680983098}
+  - component: {fileID: 680983097}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &680983096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680983095}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 51860011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &680983097
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680983095}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &680983098
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680983095}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &680983099
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680983095}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &690317642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7823,6 +8238,111 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6662833367433938877, guid: ad06b7199b1d2d74c808462f4b8c549b, type: 3}
   m_PrefabInstance: {fileID: 791658107}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &800868077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800868078}
+  - component: {fileID: 800868081}
+  - component: {fileID: 800868080}
+  - component: {fileID: 800868079}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800868078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800868077}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 319982547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &800868079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800868077}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &800868080
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800868077}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &800868081
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800868077}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &804837964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10591,7 +11111,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f32564c284d4d034ca76aaa69234f699, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12409,6 +12929,161 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6662833367433938877, guid: ad06b7199b1d2d74c808462f4b8c549b, type: 3}
   m_PrefabInstance: {fileID: 1222445455}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1226484120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226484121}
+  - component: {fileID: 1226484122}
+  m_Layer: 0
+  m_Name: Agent (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226484121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226484120}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17, y: 0, z: -9.999999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1322379148}
+  m_Father: {fileID: 1285212003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1226484122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226484120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f9b2b5143f46078d9674311de058b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 6992870185391620096
+  - rid: 6992870185391620097
+  - rid: 6992870185391620098
+  - rid: 6992870185391620099
+  - rid: 6992870185391620100
+  - rid: 6992870185391620101
+  - rid: 6992870185391620102
+  - rid: 6992870185391620103
+  GlobalField: 1
+  DrawPotential: 1
+  DrawGradient: 1
+  PotentialScale: 0.4
+  references:
+    version: 2
+    RefIds:
+    - rid: 6992870185391620096
+      type: {class: TransformComponent, ns: Scellecs.Morpeh.Transform.Components, asm: Scellecs.Morpeh.Transform}
+      data:
+        IgnoreParentDestroyed: 0
+        LocalPosition:
+          x: 17
+          y: 0
+          z: -9.999999
+        LocalRotation:
+          value:
+            x: -0
+            y: -0
+            z: -0
+            w: 1
+        LocalScale:
+          x: 1
+          y: 1
+          z: 1
+        LocalToWorld:
+          c0:
+            x: 1
+            y: 0
+            z: 0
+            w: 0
+          c1:
+            x: 0
+            y: 1
+            z: 0
+            w: 0
+          c2:
+            x: 0
+            y: 0
+            z: 1
+            w: 0
+          c3:
+            x: 17
+            y: 0
+            z: -9.999999
+            w: 1
+    - rid: 6992870185391620097
+      type: {class: GameObjectComponent, ns: Game.Common.Components, asm: Assembly-CSharp}
+      data:
+        Object: {fileID: 1226484120}
+        Transform: {fileID: 1226484121}
+        KeepGameObjectOnComponentRemove: 0
+    - rid: 6992870185391620098
+      type: {class: MovementComponent, ns: Game.Movement.Components, asm: Assembly-CSharp}
+      data:
+        MaxRadiansDelta: 0
+        FreezeRotation:
+          x: 0
+          y: 0
+          z: 0
+        Speed: 1
+        Direction:
+          x: 0
+          y: 0
+          z: 0
+    - rid: 6992870185391620099
+      type: {class: AgentLocalFieldComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        Radius: 0
+        Size: 0
+        Epsilon: 0
+        Potentials: []
+        Fixed: 
+    - rid: 6992870185391620100
+      type: {class: PotentialFieldComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        Center:
+          x: 0
+          y: 0
+          z: 0
+        Width: 0
+        Height: 0
+        CellSize: 0
+        Potentials: []
+        Fixed: 
+        Epsilon: 0
+        GoalX: 0
+        GoalY: 0
+    - rid: 6992870185391620101
+      type: {class: InitializeAgentSelfRequest, ns: Game.PotentialField.Requests, asm: Assembly-CSharp}
+      data: 
+    - rid: 6992870185391620102
+      type: {class: MapPositionComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        X: 0
+        Y: 0
+    - rid: 6992870185391620103
+      type: {class: DynamicObstacleComponent, ns: Game.PotentialField.Components, asm: Assembly-CSharp}
+      data:
+        SizeX: 1
+        SizeY: 1
 --- !u!1001 &1243006870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13349,6 +14024,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 111873674}
+  - {fileID: 1226484121}
+  - {fileID: 51860011}
+  - {fileID: 319982547}
   - {fileID: 1300937792}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13753,6 +14431,111 @@ MonoBehaviour:
     - rid: 6992870163477692425
       type: {class: InitializeMapSelfRequest, ns: Game.PotentialField.Requests, asm: Assembly-CSharp}
       data: 
+--- !u!1 &1322379147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1322379148}
+  - component: {fileID: 1322379151}
+  - component: {fileID: 1322379150}
+  - component: {fileID: 1322379149}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1322379148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322379147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1226484121}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1322379149
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322379147}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1322379150
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322379147}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1322379151
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322379147}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1333441564
 PrefabInstance:
   m_ObjectHideFlags: 0

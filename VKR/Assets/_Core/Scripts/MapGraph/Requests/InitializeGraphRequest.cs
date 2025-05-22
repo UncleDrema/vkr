@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace Game.MapGraph.Requests
 {
@@ -10,7 +12,8 @@ namespace Game.MapGraph.Requests
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct InitializeGraphRequest : IComponent
     {
-        public LevelGraph LevelGraphData;
+        public List<Vector3> Nodes;
+        public List<Edge> Edges;
         public float DesiredSegmentLength;
     }
 }

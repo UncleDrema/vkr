@@ -1,13 +1,11 @@
 ﻿using Game.Movement.Components;
 using Game.PotentialField.Components;
 using Game.PotentialField.Events;
-using Game.PotentialField.Old;
 using Game.PotentialField.Tags;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Unity.IL2CPP.CompilerServices;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Game.PotentialField.Systems
 {

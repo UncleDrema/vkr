@@ -2,6 +2,7 @@
 using Game.Common;
 using Game.MapGraph;
 using Game.Movement;
+using Game.Planning;
 using Game.PotentialField;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Feature;
@@ -34,7 +35,8 @@ namespace Game.GameStartup
             {
                 _container.CreateFeature<MapGraphFeature>(),
                 _container.CreateFeature<PotentialFieldFeature>(),
-                _container.CreateFeature<MovementFeature>()
+                _container.CreateFeature<MovementFeature>(),
+                _container.CreateFeature<PlanningFeature>(),
             };
         }
 

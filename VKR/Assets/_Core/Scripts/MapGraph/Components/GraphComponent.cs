@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scellecs.Morpeh;
-using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
 using Unity.Mathematics;
 
@@ -15,5 +14,6 @@ namespace Game.MapGraph.Components
     {
         public List<Entity> Vertices;
         public List<int2> Edges;
+        public Dictionary<Entity, Dictionary<Entity, float>> VertexDistances;
     }
 }

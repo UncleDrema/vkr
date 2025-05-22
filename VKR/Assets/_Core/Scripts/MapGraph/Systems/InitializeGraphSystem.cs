@@ -22,6 +22,7 @@ namespace Game.MapGraph.Systems
         {
             _initRequests = World.Filter
                 .With<InitializeGraphRequest>()
+                .Without<GraphComponent>()
                 .Build();
         }
 
@@ -32,9 +33,8 @@ namespace Game.MapGraph.Systems
                 ref var cInitRequest = ref graph.GetComponent<InitializeGraphRequest>();
                 
                 var segmentLength = cInitRequest.DesiredSegmentLength;
-                var levelGraph = cInitRequest.LevelGraphData;
-                var nodes = levelGraph.nodes;
-                var edges = levelGraph.edges;
+                var nodes = cInitRequest.Nodes;
+                var edges = cInitRequest.Edges;
 
                 var allPositions = new NativeList<float3>(nodes.Count, Allocator.Temp);
                 var edgeIndices = new NativeList<int2>(edges.Count, Allocator.Temp);
@@ -73,6 +73,7 @@ namespace Game.MapGraph.Systems
                 ref var cGraph = ref graph.AddComponent<GraphComponent>();
                 cGraph.Vertices = new List<Entity>(nodes.Count);
                 cGraph.Edges = new List<int2>(edges.Count);
+                cGraph.VertexDistances = new Dictionary<Entity, Dictionary<Entity, float>>();
                 var mapOldToEntity = new NativeArray<Entity>(allPositions.Length, Allocator.Temp);
                 
                 for (int i = 0; i < allPositions.Length; i++)
@@ -103,10 +104,53 @@ namespace Game.MapGraph.Systems
                     
                     cGraph.Edges.Add(idx);
                 }
+
+                ComputeDistances(ref cGraph);
                 
                 allPositions.Dispose();
                 edgeIndices.Dispose();
                 mapOldToEntity.Dispose();
+            }
+        }
+
+        // Рассчет расстояний между вершинами графа алгоритмом Дейкстры
+        private void ComputeDistances(ref GraphComponent cGraph)
+        {
+            var vertices = cGraph.Vertices;
+            var edges = cGraph.Edges;
+            var vertexDistances = cGraph.VertexDistances;
+            
+            foreach (var vertex in vertices)
+            {
+                var distances = new Dictionary<Entity, float>();
+                var queue = new List<Entity>();
+                var visited = new HashSet<Entity>();
+
+                distances[vertex] = 0f;
+                queue.Add(vertex);
+
+                while (queue.Count > 0)
+                {
+                    Entity current = queue[0];
+                    queue.RemoveAt(0);
+                    visited.Add(current);
+
+                    ref var cCurrent = ref current.GetComponent<GraphVertexComponent>();
+                    foreach (var neighbor in cCurrent.Neighbors)
+                    {
+                        if (visited.Contains(neighbor))
+                            continue;
+
+                        float distance = math.distance(cCurrent.Position, neighbor.GetComponent<GraphVertexComponent>().Position);
+                        if (!distances.ContainsKey(neighbor) || distances[neighbor] > distances[current] + distance)
+                        {
+                            distances[neighbor] = distances[current] + distance;
+                            queue.Add(neighbor);
+                        }
+                    }
+                }
+
+                vertexDistances[vertex] = distances;
             }
         }
     }

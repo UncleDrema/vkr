@@ -13,7 +13,7 @@ namespace Game.MapGraph.Requests
     {
         public float3 Position;
         public float ThreatLevel;
-        public float ThreadDuration;
+        public float ThreatDuration;
         public ThreatDecayType DecayType;
     }
 }

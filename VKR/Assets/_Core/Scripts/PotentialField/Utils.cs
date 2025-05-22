@@ -5,6 +5,33 @@ namespace Game.PotentialField
 {
     public static class Utils
     {
+        public static int GetIndexRaw(int x, int y, int width, int height)
+        {
+            return y * width + x;
+        }
+        
+        public static int GetIndex(int x, int y, int width, int height)
+        {
+            return math.clamp(GetIndexRaw(x, y, width, height), 0, width * height - 1);
+        }
+        
+        public static float2 GetGradient(
+            ref Span<double> matrix,
+            int x,
+            int y,
+            int width,
+            int height
+        )
+        {
+            var index = GetIndexRaw(x, y, width, height);
+            var pl = x > 0 ? matrix[index - 1] : matrix[index];
+            var pr = x < width - 1 ? matrix[index + 1] : matrix[index];
+            var pb = y > 0 ? matrix[index - width] : matrix[index];
+            var pt = y < height - 1 ? matrix[index + width] : matrix[index];
+
+            return new float2((float)(pr - pl) / 2f, (float)(pt - pb) / 2f);
+        }
+        
         public static void GaussSeidel(
             ref Span<double> matrix,
             ref Span<bool> fixedValues,

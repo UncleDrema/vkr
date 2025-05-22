@@ -21,6 +21,7 @@ namespace Game.PotentialField.Systems
         public override void OnAwake()
         {
             _initRequests = World.Filter
+                .With<TransformComponent>()
                 .With<GlobalMapComponent>()
                 .With<InitializeMapSelfRequest>()
                 .Build();

@@ -1,7 +1,5 @@
 ﻿using Game.Common.Components;
 using Game.Movement.Components;
-using Game.PotentialField.Components;
-using Game.PotentialField.Old;
 using Scellecs.Morpeh;
 
 namespace Game.Player
@@ -12,7 +10,6 @@ namespace Game.Player
         {
             RegisterType<GameObjectComponent>();
             RegisterType<MovementComponent>();
-            RegisterType<PotentialFieldValueComponent>();
         }
 
         private void Start()

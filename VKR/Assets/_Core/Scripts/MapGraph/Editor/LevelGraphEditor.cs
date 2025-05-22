@@ -102,7 +102,7 @@ namespace Game.MapGraph.Editor
                             if (!exists)
                             {
                                 Undo.RecordObject(graph, "Add Graph Edge");
-                                graph.edges.Add(new LevelGraph.Edge { a = firstNodeIndex, b = i });
+                                graph.edges.Add(new Edge { a = firstNodeIndex, b = i });
                                 EditorUtility.SetDirty(graph);
                             }
 

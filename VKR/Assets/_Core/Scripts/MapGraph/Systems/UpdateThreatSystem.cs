@@ -2,6 +2,8 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Unity.IL2CPP.CompilerServices;
+using Unity.Mathematics;
+using UnityEngine;
 
 namespace Game.MapGraph.Systems
 {
@@ -30,9 +32,11 @@ namespace Game.MapGraph.Systems
             foreach (var vertex in _vertices)
             {
                 ref GraphVertexComponent cVertex = ref _verticesStash.Get(vertex);
-                
+                var visitedTime = cVertex.LastObservationTime;
+                var timeFromLastVisit = Time.time - visitedTime;
                 // Сбрасываем угрозу на вершине
-                cVertex.Threat = 1f;
+                var threatFromUnvisited = 10 * math.tanh(timeFromLastVisit / 120f);
+                cVertex.Threat = threatFromUnvisited;
             }
             foreach (var entity in _threatFilter)
             {

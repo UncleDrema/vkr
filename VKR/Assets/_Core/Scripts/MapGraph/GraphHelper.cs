@@ -14,7 +14,7 @@ namespace Game.MapGraph
             ref var cSpawnReq = ref World.Default.CreateEventEntity<SpawnThreatByPositionRequest>();
             cSpawnReq.Position = transform.position;
             cSpawnReq.ThreatLevel = level;
-            cSpawnReq.ThreadDuration = duration;
+            cSpawnReq.ThreatDuration = duration;
             cSpawnReq.DecayType = decayType;
         }
 
