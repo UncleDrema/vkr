@@ -32,7 +32,7 @@ namespace Game.MapGraph.Systems
                 ref GraphVertexComponent cVertex = ref _verticesStash.Get(vertex);
                 
                 // Сбрасываем угрозу на вершине
-                cVertex.Threat = 0f;
+                cVertex.Threat = 1f;
             }
             foreach (var entity in _threatFilter)
             {

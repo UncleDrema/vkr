@@ -7,24 +7,16 @@ namespace Game.MapGraph
 {
     public class GraphService
     {
-        private World _world;
         private Filter _graphFilter;
-
-        public GraphService()
-        {
-            Debug.Log($"GraphService created: {this}");
-        }
 
         public void Initialize(World world)
         {
-            Debug.Log($"GraphService initialized: {this}");
-            _world = world;
             _graphFilter = world.Filter.With<GraphComponent>().Build();
         }
         
-        public Entity GetNearestVertex(float3 position)
+        public Entity GetNearestVertex(float3 position, out float minDistance)
         {
-            float minDistance = float.MaxValue;
+            minDistance = float.MaxValue;
             Entity nearestVertex = default;
             
             foreach (var entity in _graphFilter)

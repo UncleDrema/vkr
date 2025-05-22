@@ -18,12 +18,15 @@ namespace Game.MapGraph
             RegisterRequest<InitializeGraphRequest>();
             RegisterRequest<SpawnThreatByPositionRequest>();
             RegisterRequest<SpawnThreatRequest>();
+            RegisterRequest<InitializeGraphZonesRequest>();
          
             AddInitializer(new InitializeGraphService(_graphService));
             AddSystem(new InitializeGraphSystem());
+            AddSystem(new InitializeGraphZonesSystem());
             AddSystem(new TransformSpawnThreatRequestSystem(_graphService));
             AddSystem(new SpawnThreatSystem());
             AddSystem(new UpdateThreatSystem());
+            AddSystem(new ZoneDriftSystem());
         }
     }
 }

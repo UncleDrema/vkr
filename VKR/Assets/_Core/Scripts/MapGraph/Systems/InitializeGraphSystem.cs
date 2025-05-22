@@ -72,6 +72,7 @@ namespace Game.MapGraph.Systems
                 
                 ref var cGraph = ref graph.AddComponent<GraphComponent>();
                 cGraph.Vertices = new List<Entity>(nodes.Count);
+                cGraph.Edges = new List<int2>(edges.Count);
                 var mapOldToEntity = new NativeArray<Entity>(allPositions.Length, Allocator.Temp);
                 
                 for (int i = 0; i < allPositions.Length; i++)
@@ -81,7 +82,7 @@ namespace Game.MapGraph.Systems
                     ref var cVertex = ref vertex.AddComponent<GraphVertexComponent>();
 
                     cVertex.Position = node;
-                    cVertex.Neighbors = new List<Entity>(edgeIndices.Length);
+                    cVertex.Neighbors = new List<Entity>(2);
                     cVertex.Threat = 0f;
                     cVertex.LastObservationTime = Time.time;
 
@@ -99,6 +100,8 @@ namespace Game.MapGraph.Systems
                     // и наоборот
                     ref var nb = ref vb.GetComponent<GraphVertexComponent>();
                     nb.Neighbors.Add(va);
+                    
+                    cGraph.Edges.Add(idx);
                 }
                 
                 allPositions.Dispose();

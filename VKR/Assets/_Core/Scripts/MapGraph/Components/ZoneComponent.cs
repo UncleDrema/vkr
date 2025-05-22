@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scellecs.Morpeh;
-using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
-using Unity.Mathematics;
 
 namespace Game.MapGraph.Components
 {
@@ -11,9 +9,9 @@ namespace Game.MapGraph.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct GraphComponent : IComponent
+    public struct ZoneComponent : IComponent
     {
+        public int ZoneId;
         public List<Entity> Vertices;
-        public List<int2> Edges;
     }
 }

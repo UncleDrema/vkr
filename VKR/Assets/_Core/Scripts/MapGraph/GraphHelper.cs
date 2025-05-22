@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.MapGraph
 {
-    public class ThreatHelper : MonoBehaviour
+    public class GraphHelper : MonoBehaviour
     {
         [Button]
         public void SpawnThreatByPosition(float level, float duration, ThreatDecayType decayType)
@@ -16,6 +16,13 @@ namespace Game.MapGraph
             cSpawnReq.ThreatLevel = level;
             cSpawnReq.ThreadDuration = duration;
             cSpawnReq.DecayType = decayType;
+        }
+
+        [Button]
+        public void InitializeGraphZones(int zoneCount)
+        {
+            ref var cInitReq = ref World.Default.CreateEventEntity<InitializeGraphZonesRequest>();
+            cInitReq.ZoneCount = zoneCount;
         }
     }
 }

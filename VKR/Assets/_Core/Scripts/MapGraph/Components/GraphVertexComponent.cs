@@ -17,5 +17,6 @@ namespace Game.MapGraph.Components
         public List<Entity> Neighbors;
         public float Threat;
         public float LastObservationTime;
+        public Entity Zone;
     }
 }
