@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.MapGraph.Components;
 using Game.Planning.Components;
+using Game.PotentialField;
+using Game.PotentialField.Components;
 using Game.PotentialField.Requests;
 using Game.SimulationControl.Components;
 using Game.SimulationControl.Requests;
@@ -15,6 +18,7 @@ namespace Game.UI
 {
     public class GameUi : MonoBehaviour
     {
+        public Canvas GameUiCanvas;
         public TMP_Text zonesThreatText;
         public TMP_Text agentsZonesText;
         public TMP_Text timeFpsText;
@@ -28,6 +32,9 @@ namespace Game.UI
         
         public Button agentsPlusButton;
         public Button agentsMinusButton;
+
+        public GameObject errorPanel;
+        public TMP_Text errorText;
         
         private World _world;
         private Filter _zones;
@@ -50,6 +57,20 @@ namespace Game.UI
             agentsMinusButton.onClick.RemoveListener(OnAgentsMinusButtonClicked);
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                GameUiCanvas.enabled = !GameUiCanvas.enabled;
+            }
+        }
+
+        public void ShowError(string error)
+        {
+            errorPanel.SetActive(true);
+            errorText.text = error;
+        }
+
         public void SetAgents(List<AgentDescription> agents)
         {
             foreach (Transform child in agentRowContainer.transform)
@@ -68,9 +89,10 @@ namespace Game.UI
             }
         }
         
-        public List<AgentDescription> GetAgents()
+        public List<AgentDescription> GetAgents(out bool valid)
         {
             var result = new List<AgentDescription>();
+            valid = true;
 
             var rows = agentRowContainer.GetComponentsInChildren<AgentRow>();
             foreach (var row in rows)
@@ -89,7 +111,9 @@ namespace Game.UI
                 }
                 catch (System.Exception e)
                 {
+                    valid = false;
                     Debug.LogError($"Error parsing agent data: {e.Message}");
+                    break;
                 }
             }
 
@@ -115,16 +139,66 @@ namespace Game.UI
         
         private void OnStartSimpleButtonClicked()
         {
-            ref var cReq = ref _world.CreateEventEntity<StartSimulationRequest>();
-            cReq.Mode = SimulationMode.SimpleMovement;
-            cReq.Agents = GetAgents();
+            StartSimulationWithAgentsFromTable(SimulationMode.SimpleMovement);
         }
 
         private void OnStartPotentialFieldsButtonClicked()
         {
+            StartSimulationWithAgentsFromTable(SimulationMode.PotentialFieldMovement);
+        }
+        
+        private void StartSimulationWithAgentsFromTable(SimulationMode mode)
+        {
+            var agents = GetAgents(out var valid);
+            
+            if (!valid)
+            {
+                ShowError("Некорректные параметры агентов.");
+                return;
+            }
+            
+            if (agents.Count == 0)
+            {
+                ShowError("Не указаны агенты.");
+                return;
+            }
+            var vertexCount = _world.Filter
+                .With<GraphVertexComponent>()
+                .Build()
+                .GetLengthSlow();
+            if (agents.Count > vertexCount)
+            {
+                ShowError($"Количество агентов ({agents.Count}) больше количества вершин ({vertexCount}).");
+                return;
+            }
+            
+            // Проверим что у всех агентов позиция в пределах карты и скорость больше нуля
+            for (int i = 0; i < agents.Count; i++)
+            {
+                var agent = agents[i];
+                if (agent.Speed <= 0)
+                {
+                    ShowError($"У агента {i} скорость должна быть больше нуля.");
+                    return;
+                }
+                
+                var ms = new MapService();
+                ms.Initialize(_world);
+                var mapPos = ms.WorldToMapPosition(agent.Position);
+                foreach (var map in _world.Filter.With<GlobalMapComponent>().Build())
+                {
+                    ref var cMap = ref map.GetComponent<GlobalMapComponent>();
+                    if (mapPos.x < 0 || mapPos.x >= cMap.Width || mapPos.y < 0 || mapPos.y >= cMap.Height)
+                    {
+                        ShowError($"Позиция агента {i} ({agent.Position}) выходит за пределы карты.");
+                        return;
+                    }
+                }
+            }
+
             ref var cReq = ref _world.CreateEventEntity<StartSimulationRequest>();
-            cReq.Mode = SimulationMode.PotentialFieldMovement;
-            cReq.Agents = GetAgents();
+            cReq.Mode = mode;
+            cReq.Agents = agents;
         }
         
         private void OnCollectStatisticsButtonClicked()

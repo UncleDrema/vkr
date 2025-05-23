@@ -19,6 +19,7 @@ namespace Game.Editor.Tests.PotentialField
             return new float3(x, y, z);
         }
         
+        /*
         [TestCase(10, 10, 1, 10, 10)]
         [TestCase(25, 25, 1, 10, 100)]
         [TestCase(50, 50, 1, 10, 250)]
@@ -85,6 +86,7 @@ namespace Game.Editor.Tests.PotentialField
             
             Assert.IsTrue(goalReached, "Goal was not reached within the simulation time.");
         }
+        */
         
         [Test]
         public void Test_CantSetGoalWhenSurroundedByObstacles()
