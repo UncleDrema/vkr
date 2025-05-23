@@ -1,4 +1,5 @@
-﻿using Game.UI.Components;
+﻿using Game.PotentialField.Events;
+using Game.UI.Components;
 using Game.UI.Tags;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
@@ -12,12 +13,16 @@ namespace Game.UI.Systems
     public sealed class UpdateUiSystem : LateUpdateSystem
     {
         private Filter _ui;
+        private Filter _agentsCreatedEvents;
         
         public override void OnAwake()
         {
             _ui = World.Filter
                 .With<UiComponent>()
                 .With<InitializedUiTag>()
+                .Build();
+            _agentsCreatedEvents = World.Filter
+                .With<AgentsCreatedEvent>()
                 .Build();
         }
 
@@ -31,6 +36,12 @@ namespace Game.UI.Systems
                     continue;
                 
                 cUi.Ui.UpdateUi(deltaTime);
+                
+                foreach (var req in _agentsCreatedEvents)
+                {
+                    ref var cCreatedEvent = ref req.GetComponent<AgentsCreatedEvent>();
+                    cUi.Ui.SetAgents(cCreatedEvent.Agents);
+                }
             }
         }
     }

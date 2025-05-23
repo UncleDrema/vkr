@@ -1,6 +1,6 @@
-﻿using Game.Planning.Components;
-using Game.PotentialField.Components;
+﻿using Game.PotentialField.Components;
 using Game.PotentialField.Requests;
+using Game.SimulationControl;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Scellecs.Morpeh.Transform.Components;
@@ -13,9 +13,16 @@ namespace Game.PotentialField.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class InitializeAgentSystem : UpdateSystem
     {
+        private readonly SimulationService _simulationService;
+        
         private Filter _maps;
         private Filter _agents;
-        
+
+        public InitializeAgentSystem(SimulationService simulationService)
+        {
+            _simulationService = simulationService;
+        }
+
         public override void OnAwake()
         {
             _agents = World.Filter
@@ -32,15 +39,16 @@ namespace Game.PotentialField.Systems
 
         public override void OnUpdate(float deltaTime)
         {
+            if (_simulationService.CurrentSimulationMode != SimulationMode.PotentialFieldMovement)
+                return;
+            
             foreach (var agent in _agents)
             {
-                ref var cPatrol = ref agent.AddComponent<AgentPatrolComponent>();
                 ref var cLocalField = ref agent.GetComponent<AgentLocalFieldComponent>();
                 ref var cTransform = ref agent.GetComponent<TransformComponent>();
                 ref var cPotentialField = ref agent.GetComponent<PotentialFieldComponent>();
                 ref var cInitRequest = ref agent.GetComponent<InitializeAgentSelfRequest>();
 
-                cPatrol.GoalVertex = default;
                 cLocalField.Radius = 10;
                 cLocalField.Size = cLocalField.Radius * 2 + 1;
                 cLocalField.Epsilon = 0.05;

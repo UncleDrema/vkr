@@ -11,5 +11,7 @@ namespace Game.SceneManagement.Api
         UniTask UnloadScene(string scenePath);
         UniTask UnloadActiveScene();
         UniTask UnloadActiveSceneNextFrame();
+        UniTask ReloadActiveScene();
+        UniTask UnloadActiveThenLoadScene(string scenePath, bool isActive = true);
     }
 }

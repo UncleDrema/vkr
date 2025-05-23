@@ -1,5 +1,6 @@
 ﻿using Game.PotentialField.Components;
 using Game.PotentialField.Requests;
+using Game.SimulationControl;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Scellecs.Morpeh.Transform.Components;
@@ -7,6 +8,7 @@ using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
+using SimulationMode = Game.SimulationControl.SimulationMode;
 
 namespace Game.PotentialField.Systems
 {
@@ -15,9 +17,16 @@ namespace Game.PotentialField.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class InitializeMapSystem : UpdateSystem
     {
+        private readonly SimulationService _simulationService;
+        
         private Filter _initRequests;
         private Filter _obstacles;
-        
+
+        public InitializeMapSystem(SimulationService simulationService)
+        {
+            _simulationService = simulationService;
+        }
+
         public override void OnAwake()
         {
             _initRequests = World.Filter
@@ -34,6 +43,9 @@ namespace Game.PotentialField.Systems
 
         public override void OnUpdate(float deltaTime)
         {
+            if (_simulationService.CurrentSimulationMode != SimulationMode.PotentialFieldMovement)
+                return;
+            
             foreach (var initReq in _initRequests)
             {
                 ref var cTransform = ref initReq.GetComponent<TransformComponent>();

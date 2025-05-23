@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Game.Common.Components;
+﻿using Game.Common.Components;
 using Game.Movement.Components;
 using Game.PotentialField.Components;
 using Game.PotentialField.Requests;
@@ -29,6 +28,7 @@ namespace Game.PotentialField.Entities
             RegisterType<InitializeAgentSelfRequest>();
             RegisterType<MapPositionComponent>();
             RegisterType<DynamicObstacleComponent>();
+            RegisterType<MovementAnimatorComponent>();
         }
 
         [Button]

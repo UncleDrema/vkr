@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.MapGraph.Components;
 using Game.MapGraph.Requests;
 using Scellecs.Morpeh;
@@ -86,6 +85,7 @@ namespace Game.MapGraph.Systems
                     cVertex.Neighbors = new List<Entity>(2);
                     cVertex.Threat = 0f;
                     cVertex.LastObservationTime = Time.time;
+                    cVertex.LastSelectFailedTime = Time.time;
 
                     cGraph.Vertices.Add(vertex);
                     mapOldToEntity[i] = vertex;

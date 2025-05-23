@@ -2,7 +2,6 @@
 using Scellecs.Morpeh;
 using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game.PotentialField.Components
@@ -11,7 +10,10 @@ namespace Game.PotentialField.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct GlobalMapComponent : IComponent, IDrawGizmosSelected
+    public struct GlobalMapComponent : IComponent
+#if UNITY_EDITOR
+        , IDrawGizmosSelected
+    #endif
     {
         public int Width, Height;
         public float CellSize;

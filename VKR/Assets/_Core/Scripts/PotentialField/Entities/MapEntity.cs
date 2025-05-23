@@ -4,7 +4,6 @@ using Game.PotentialField.Requests;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using Scellecs.Morpeh.Transform.Components;
-using UnityEditor;
 using UnityEngine;
 
 namespace Game.PotentialField.Entities

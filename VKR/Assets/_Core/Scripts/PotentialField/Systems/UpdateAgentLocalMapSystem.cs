@@ -2,6 +2,7 @@
 using Game.PotentialField.Components;
 using Game.PotentialField.Events;
 using Game.PotentialField.Requests;
+using Game.SimulationControl;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Scellecs.Morpeh.Transform.Components;
@@ -15,9 +16,16 @@ namespace Game.PotentialField.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class UpdateAgentLocalMapSystem : UpdateSystem
     {
+        private readonly SimulationService _simulationService;
+        
         private Filter _agents;
         private Filter _dynamicObstacles;
-        
+
+        public UpdateAgentLocalMapSystem(SimulationService simulationService)
+        {
+            _simulationService = simulationService;
+        }
+
         public override void OnAwake()
         {
             _agents = World.Filter
@@ -35,6 +43,9 @@ namespace Game.PotentialField.Systems
 
         public override void OnUpdate(float deltaTime)
         {
+            if (_simulationService.CurrentSimulationMode != SimulationMode.PotentialFieldMovement)
+                return;
+            
             foreach (var agent in _agents)
             {
                 ref var cLocalField = ref agent.GetComponent<AgentLocalFieldComponent>();

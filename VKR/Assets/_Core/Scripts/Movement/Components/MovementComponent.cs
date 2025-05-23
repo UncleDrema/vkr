@@ -1,6 +1,5 @@
 ﻿using System;
 using Scellecs.Morpeh;
-using TriInspector;
 using Unity.IL2CPP.CompilerServices;
 using Unity.Mathematics;
 

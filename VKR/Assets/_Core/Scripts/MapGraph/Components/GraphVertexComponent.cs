@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scellecs.Morpeh;
-using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
 using Unity.Mathematics;
 
@@ -18,5 +17,6 @@ namespace Game.MapGraph.Components
         public float Threat;
         public float LastObservationTime;
         public Entity Zone;
+        public float LastSelectFailedTime;
     }
 }

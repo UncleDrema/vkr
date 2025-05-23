@@ -8,6 +8,7 @@ namespace Game.Movement
         protected override void Initialize()
         {
             AddSystem(new MovementSystem());
+            AddSystem(new UpdateAnimationSystem());
         }
     }
 }

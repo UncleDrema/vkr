@@ -1,5 +1,4 @@
-﻿using Scellecs.Morpeh;
-using VContainer;
+﻿using VContainer;
 
 namespace Game.MapGraph
 {

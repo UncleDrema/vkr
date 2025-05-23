@@ -90,5 +90,16 @@ namespace Game.SceneManagement.Core
         {
             return SceneManager.GetSceneByPath(path).isLoaded;
         }
+        
+        public async UniTask UnloadActiveThenLoadScene(string scenePath, bool isActive = true)
+        {
+            await UnloadActiveScene();
+            await LoadSceneAsync(scenePath, isActive);
+        }
+        
+        public async UniTask ReloadActiveScene()
+        {
+            await UnloadActiveThenLoadScene(SceneManager.GetActiveScene().path);
+        }
     }
 }

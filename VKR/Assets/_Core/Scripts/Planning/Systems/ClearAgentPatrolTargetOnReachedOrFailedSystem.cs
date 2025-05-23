@@ -1,8 +1,10 @@
-﻿using Game.Planning.Components;
+﻿using Game.MapGraph.Components;
+using Game.Planning.Components;
 using Game.PotentialField.Events;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace Game.Planning.Systems
 {
@@ -38,7 +40,10 @@ namespace Game.Planning.Systems
             foreach (var agent in _failedSetGoalAgents)
             {
                 ref var cPatrol = ref agent.GetComponent<AgentPatrolComponent>();
-
+                var goalVertex = cPatrol.GoalVertex;
+                ref var cGraphVertex = ref goalVertex.GetComponent<GraphVertexComponent>();
+                cGraphVertex.LastSelectFailedTime = Time.time;
+                
                 cPatrol.GoalVertex = default;
             }
         }

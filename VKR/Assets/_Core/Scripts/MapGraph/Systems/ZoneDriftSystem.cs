@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Game.MapGraph.Components;
+using Game.SimulationControl;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Systems;
 using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace Game.MapGraph.Systems
 {
@@ -14,9 +13,16 @@ namespace Game.MapGraph.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class ZoneDriftSystem : UpdateSystem
     {
+        private readonly SimulationService _simulationService;
+        
         private Filter _zones;
         private Filter _vertices;
-        
+
+        public ZoneDriftSystem(SimulationService simulationService)
+        {
+            _simulationService = simulationService;
+        }
+
         public override void OnAwake()
         {
             _zones = World.Filter
@@ -78,7 +84,7 @@ namespace Game.MapGraph.Systems
                 // i-zone: zone, j-zone: toZone
                 // для каждой смежной зоны вычисляем Δ
                 const float lambdaT = 1f;
-                const float lambdaS = 10f;
+                const float lambdaS = 20f;
                 foreach (var toZone in neighborZones)
                 {
                     float Ti = zoneTotal[zone];

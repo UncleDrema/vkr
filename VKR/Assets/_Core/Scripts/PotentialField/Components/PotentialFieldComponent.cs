@@ -1,9 +1,7 @@
 ﻿using System;
 using Scellecs.Morpeh;
-using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Game.PotentialField.Components
 {

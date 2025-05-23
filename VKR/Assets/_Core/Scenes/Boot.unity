@@ -185,6 +185,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 1119164857}
   _sceneRepository: {fileID: 11400000, guid: 14ca76b26b4326244887a22966056351, type: 2}
+  _agentConfig: {fileID: 11400000, guid: 1a3996a37262ffc4c84e6067402a566b, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

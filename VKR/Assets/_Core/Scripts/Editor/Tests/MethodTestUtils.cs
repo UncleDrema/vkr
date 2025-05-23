@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Common;
 using Game.MapGraph;
 using Game.MapGraph.Requests;
@@ -8,6 +9,8 @@ using Game.Planning;
 using Game.PotentialField;
 using Game.PotentialField.Components;
 using Game.PotentialField.Requests;
+using Game.SceneManagement.Api;
+using Game.SimulationControl;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons;
 using Scellecs.Morpeh.Addons.Feature;
@@ -20,6 +23,25 @@ namespace Game.Editor.Tests
 {
     public class MethodTestUtils
     {
+        private class StubSceneLoader : ISceneLoader
+        {
+            public bool IsGameLoaded { get; }
+            public async UniTask LoadGameScene() {
+            }
+
+            public async UniTask LoadScene(string scenePath, bool isActive = true) { }
+
+            public async UniTask UnloadScene(string scenePath) { }
+
+            public async UniTask UnloadActiveScene() { }
+
+            public async UniTask UnloadActiveSceneNextFrame() { }
+
+            public async UniTask ReloadActiveScene() { }
+
+            public async UniTask UnloadActiveThenLoadScene(string scenePath, bool isActive = true) { }
+        }
+        
         public static World CreateWorld()
         {
             MorpehAddons.Initialize();
@@ -28,12 +50,16 @@ namespace Game.Editor.Tests
             var mapService = new MapService();
             var graphService = new GraphService();
             var patrolService = new PatrolService();
+            var simulationService = new SimulationService();
+            var sceneLoaderService = new StubSceneLoader();
+            var agentConfig = TestUtils.LoadAsset<AgentConfig>();
 
             int order = 0;
-            world.AddFeature(order++, new MapGraphFeature(graphService));
-            world.AddFeature(order++, new PotentialFieldFeature(mapService));
+            world.AddFeature(order++, new MapGraphFeature(graphService, simulationService));
+            world.AddFeature(order++, new PotentialFieldFeature(mapService, simulationService, graphService, agentConfig));
             world.AddFeature(order++, new MovementFeature());
-            world.AddFeature(order++, new PlanningFeature(graphService, patrolService));
+            world.AddFeature(order++, new PlanningFeature(graphService, patrolService, simulationService));
+            world.AddFeature(order++, new SimulationControlFeature(sceneLoaderService, simulationService));
 
             world.AddFeature(order++, new HierarchyFeature());
             world.AddFeature(order++, new TransformFeature());

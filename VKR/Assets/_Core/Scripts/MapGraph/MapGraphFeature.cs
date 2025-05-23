@@ -1,6 +1,7 @@
 ﻿using Game.MapGraph.Events;
 using Game.MapGraph.Requests;
 using Game.MapGraph.Systems;
+using Game.SimulationControl;
 using Scellecs.Morpeh.Addons.Feature;
 
 namespace Game.MapGraph
@@ -8,10 +9,12 @@ namespace Game.MapGraph
     public class MapGraphFeature : UpdateFeature
     {
         private readonly GraphService _graphService;
+        private readonly SimulationService _simulationService;
         
-        public MapGraphFeature(GraphService graphService)
+        public MapGraphFeature(GraphService graphService, SimulationService simulationService)
         {
             _graphService = graphService;
+            _simulationService = simulationService;
         }
         
         protected override void Initialize()
@@ -29,7 +32,7 @@ namespace Game.MapGraph
             AddSystem(new TransformSpawnThreatRequestSystem(_graphService));
             AddSystem(new SpawnThreatSystem());
             AddSystem(new UpdateThreatSystem());
-            AddSystem(new ZoneDriftSystem());
+            AddSystem(new ZoneDriftSystem(_simulationService));
             
             RegisterEvent<ZonesInitializedEvent>();
         }
