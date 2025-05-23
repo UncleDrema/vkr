@@ -86,8 +86,8 @@ namespace Game.Planning.Systems
                      * b=\operatorname{abs}\left(\tanh\left(x-3\right)\right)-1
                      * c=\frac{\left(\tanh\left(x-6\right)+1\right)}{2}
                      */
-                    float b = math.abs(math.tanh(d - 3)) - 1;
-                    float c = (math.tanh(d - 6) + 1) / 2;
+                    float b = math.abs(math.tanh(d - 6)) - 1;
+                    float c = (math.tanh(d - 12) + 1) / 2;
                     float y = math.pow(d, 1 - c) - 1 + math.abs(30 * b) + 1;
                     float score = lambdaU * Uv + lambdaD * y;
                     if (score > bestScore)
@@ -101,7 +101,7 @@ namespace Game.Planning.Systems
                 cPatrol.GoalVertex = bestV;
                 ref var cSetGoalRequest = ref agent.AddComponent<SetGoalByPositionSelfRequest>();
                 cSetGoalRequest.Position = bestPosition;
-                Debug.Log($"Assigned goal {bestV} to agent {agent} with score {bestScore} and position {bestPosition}");
+                //Debug.Log($"Assigned goal {bestV} to agent {agent} with score {bestScore} and position {bestPosition}");
             }
         }
     }

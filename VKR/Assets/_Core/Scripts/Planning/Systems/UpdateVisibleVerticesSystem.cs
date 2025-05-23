@@ -50,6 +50,7 @@ namespace Game.Planning.Systems
                 var position = cTransform.Position();
                 var rotation = cTransform.Rotation();
                 var agentRadius = 3f;
+                var smallAgentRadius = 0.4f;
                 var agentAperture = 60f;
                 
                 // Рассмотрим все вершины в секторе, который видит агент с радиусом agentRadius и углом agentAperture
@@ -58,30 +59,31 @@ namespace Game.Planning.Systems
                     ref var cVertex = ref vertex.GetComponent<GraphVertexComponent>();
                     var vertexPosition = cVertex.Position;
                     
-                    if (PointInSector(position, rotation, agentRadius, agentAperture, vertexPosition))
+                    if (PlanningUtils.PointInRadius(position, smallAgentRadius, vertexPosition) ||
+                        (PlanningUtils.PointInSector(position, rotation, agentRadius, agentAperture, vertexPosition) &&
+                         IsVisible(position, vertexPosition)))
                     {
-                        // Проверим, что между агентом и вершиной нет препятствий
+                        cVertex.LastObservationTime = now;
                     }
                 }
             }
         }
 
-        private bool PointInSector(float3 position, quaternion rotation, float radius, float aperture, float3 point)
+        private bool IsVisible(float3 position, float3 vertexPosition)
         {
-            // Проверим, что точка находится в пределах радиуса
-            if (math.distance(position, point) > radius)
-                return false;
+            bool isVisible = true;
+            foreach (var obstacle in _obstacles)
+            {
+                var bounds = obstacle.GetComponent<ObstacleComponent>().Bounds;
+                // Проверяем, пересекается ли прямая от агента до вершины с препятствием
+                if (PlanningUtils.LineIntersectsBounds(position, vertexPosition, bounds))
+                {
+                    isVisible = false;
+                    break;
+                }
+            }
             
-            // Проверим, что точка находится в пределах угла aperture, при повороте rotation
-            var direction = math.normalize(point - position);
-            var forward = math.forward(rotation);
-            var right = math.cross(forward, math.up());
-            var left = math.cross(forward, right);
-            var angle = math.degrees(math.acos(math.dot(forward, direction)));
-            if (angle > aperture / 2f)
-                return false;
-            
-            return true;
+            return isVisible;
         }
     }
 }

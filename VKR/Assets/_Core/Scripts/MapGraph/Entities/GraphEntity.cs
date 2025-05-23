@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.MapGraph.Components;
 using Game.MapGraph.Requests;
 using Scellecs.Morpeh;
@@ -6,13 +7,14 @@ using UnityEngine;
 
 namespace Game.MapGraph.Entities
 {
+    [ExecuteAlways]
     public class GraphEntity : HierarchyCodeUniversalProvider
     {
         protected override void RegisterTypes()
         {
             RegisterType<InitializeGraphFromUnityRequest>();
         }
-        
+
 #if UNITY_EDITOR
         private Dictionary<int, Color> _zoneColors = new Dictionary<int, Color>()
         {

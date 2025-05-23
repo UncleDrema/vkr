@@ -4,6 +4,7 @@ using Game.MapGraph;
 using Game.Movement;
 using Game.Planning;
 using Game.PotentialField;
+using Game.UI;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Addons.Feature;
 using Scellecs.Morpeh.Addons.Feature.Unity;
@@ -52,6 +53,7 @@ namespace Game.GameStartup
                 _container.CreateFeature<HierarchyFeature>(),
                 _container.CreateFeature<TransformFeature>(),
                 _container.CreateFeature<CommonFeature>(),
+                _container.CreateFeature<UiFeature>()
             };
         }
     }

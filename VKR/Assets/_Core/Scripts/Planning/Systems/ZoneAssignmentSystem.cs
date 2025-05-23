@@ -71,12 +71,12 @@ namespace Game.Planning.Systems
                     sumThreat += cVertex.Threat;
                 }
                 zoneCenter[z] = sumPos / vertices.Count;
-                zoneThreat[z] = sumThreat;
+                zoneThreat[z] = sumThreat / vertices.Count;
             }
             
             // Стоимости C[k,i] = α·d(agent_k,center_i) - β·zoneDanger[i]
             const float alphaDistance = 1;
-            const float betaDanger = 1;
+            const float betaDanger = 10;
             // Жадно для каждого агента в порядке возрастания стоимости назначаем зону
             var assignments = new Dictionary<Entity, List<Entity>>();
             var assignedZones = new HashSet<Entity>();
@@ -104,8 +104,9 @@ namespace Game.Planning.Systems
             // Жадно назначаем, пока каждому агенту не дастся хотя бы одна зона
             foreach (var (agent, zone, cost) in costList)
             {
-                if (assignments[agent].Count == 0)
+                if (assignments[agent].Count == 0 && !assignedZones.Contains(zone))
                 {
+                    Debug.Log($"Assigning zone {zone.GetHashCode()} to agent {agent.GetHashCode()} with cost {cost}");
                     assignments[agent].Add(zone);
                     assignedZones.Add(zone);
                 }
@@ -116,6 +117,7 @@ namespace Game.Planning.Systems
             {
                 if (!assignedZones.Contains(zone))
                 {
+                    Debug.Log($"Zone {zone.GetHashCode()} is unassigned, assigning to agent {agent.GetHashCode()} with cost {cost}");
                     assignments[agent].Add(zone);
                     assignedZones.Add(zone);
                     if (assignments.Count == A)
